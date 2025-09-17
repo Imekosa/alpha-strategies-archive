@@ -3,156 +3,14 @@ export interface Strategy {
   name: string;
   slug: string;
   description: string;
-  category: 'popular' | 'bullish' | 'bearish' | 'neutral' | 'hedging';
+  category: 'bullish' | 'bearish' | 'neutral' | 'hedging';
   riskLevel: 'low' | 'medium' | 'high';
   complexity: 'beginner' | 'intermediate' | 'advanced';
   iconPath: string;
 }
 
 export const strategies: Strategy[] = [
-  // Popular Strategies (from first tab)
-  {
-    id: 'long-call',
-    name: 'Long Call',
-    slug: 'long-call',
-    description: 'A single-leg, risk-defined, bullish options strategy. Buying a call option is a levered alternative to buying shares of stock.',
-    category: 'popular',
-    riskLevel: 'medium',
-    complexity: 'beginner',
-    iconPath: '/icons/long-call.svg'
-  },
-  {
-    id: 'long-put',
-    name: 'Long Put',
-    slug: 'long-put',
-    description: 'A single-leg, risk-defined, bearish options strategy. Buying a put option is a levered alternative to shorting shares of stock.',
-    category: 'popular',
-    riskLevel: 'medium',
-    complexity: 'beginner',
-    iconPath: '/icons/long-put.svg'
-  },
-  {
-    id: 'short-call',
-    name: 'Short Call',
-    slug: 'short-call',
-    description: 'A single-leg, unlimited risk, bearish options strategy. Selling a call option generates premium income but has unlimited upside risk.',
-    category: 'popular',
-    riskLevel: 'high',
-    complexity: 'intermediate',
-    iconPath: '/icons/short-call.svg'
-  },
-  {
-    id: 'short-put',
-    name: 'Short Put',
-    slug: 'short-put',
-    description: 'A single-leg, undefined risk, bullish options strategy. Selling a put option generates premium income with substantial downside risk.',
-    category: 'popular',
-    riskLevel: 'high',
-    complexity: 'intermediate',
-    iconPath: '/icons/short-put.svg'
-  },
-  {
-    id: 'covered-call',
-    name: 'Covered Call',
-    slug: 'covered-call',
-    description: 'An options strategy with undefined risk and limited profit potential that combines a long stock position with a short call option.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'beginner',
-    iconPath: '/icons/covered-call.svg'
-  },
-  {
-    id: 'collar',
-    name: 'Collar',
-    slug: 'collar-strategy',
-    description: 'A risk management strategy that uses a protective put and covered call to limit both upside and downside risk.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'intermediate',
-    iconPath: '/icons/collar.svg'
-  },
-  {
-    id: 'bull-call-spread',
-    name: 'Bull Call Spread',
-    slug: 'bull-call-debit-spread',
-    description: 'A multi-leg, risk-defined, bullish strategy with limited profit potential that involves buying and selling call options.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'intermediate',
-    iconPath: '/icons/bull-call-spread.svg'
-  },
-  {
-    id: 'bear-call-spread',
-    name: 'Bear Call Spread',
-    slug: 'bear-call-credit-spread',
-    description: 'A multi-leg, risk-defined, bearish strategy that involves selling a call option and buying a higher strike call.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'intermediate',
-    iconPath: '/icons/bear-call-spread.svg'
-  },
-  {
-    id: 'bull-put-spread',
-    name: 'Bull Put Spread',
-    slug: 'bull-put-credit-spread',
-    description: 'A multi-leg, risk-defined, bullish strategy that involves selling a put option and buying a lower strike put.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'intermediate',
-    iconPath: '/icons/bull-put-spread.svg'
-  },
-  {
-    id: 'bear-put-spread',
-    name: 'Bear Put Spread',
-    slug: 'bear-put-debit-spread',
-    description: 'A multi-leg, risk-defined, bearish strategy that involves buying a put option and selling a lower strike put.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'intermediate',
-    iconPath: '/icons/bear-put-spread.svg'
-  },
-  {
-    id: 'short-straddle',
-    name: 'Short Straddle',
-    slug: 'short-straddle',
-    description: 'A multi-leg, undefined risk, neutral strategy that involves selling both a call and put at the same strike price.',
-    category: 'popular',
-    riskLevel: 'high',
-    complexity: 'advanced',
-    iconPath: '/icons/short-straddle.svg'
-  },
-  {
-    id: 'short-strangle',
-    name: 'Short Strangle',
-    slug: 'short-strangle',
-    description: 'A multi-leg, undefined risk, neutral strategy that involves selling a call and put at different strike prices.',
-    category: 'popular',
-    riskLevel: 'high',
-    complexity: 'advanced',
-    iconPath: '/icons/short-strangle.svg'
-  },
-  {
-    id: 'iron-condor',
-    name: 'Iron Condor',
-    slug: 'iron-condor',
-    description: 'A multi-leg, risk-defined, neutral strategy with limited profit potential that combines a bear call and bull put spread.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'advanced',
-    iconPath: '/icons/iron-condor.svg'
-  },
-  {
-    id: 'iron-butterfly',
-    name: 'Iron Butterfly',
-    slug: 'iron-butterfly',
-    description: 'A multi-leg, risk-defined, neutral strategy that combines a short straddle with protective wings.',
-    category: 'popular',
-    riskLevel: 'low',
-    complexity: 'advanced',
-    iconPath: '/icons/iron-butterfly.svg'
-  },
-
-  // Bullish Strategies (from second tab)
+  // Bullish Strategies
   {
     id: 'long-call-bullish',
     name: 'Long Call',
@@ -612,9 +470,6 @@ export const strategies: Strategy[] = [
 ];
 
 export const getStrategiesByCategory = (category: string) => {
-  if (category === 'popular') {
-    return strategies.filter(s => s.category === 'popular');
-  }
   return strategies.filter(s => s.category === category);
 };
 

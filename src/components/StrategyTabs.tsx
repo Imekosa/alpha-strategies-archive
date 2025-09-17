@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StrategyCard } from "./StrategyCard";
 import { strategies, getStrategiesByCategory } from "@/data/strategies";
 import { useNavigate } from "react-router-dom";
-import { Heart, TrendingUp, TrendingDown, Minus, Shield } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Shield } from "lucide-react";
 
 export const StrategyTabs = () => {
   const navigate = useNavigate();
@@ -13,8 +13,6 @@ export const StrategyTabs = () => {
 
   const getTabIcon = (category: string) => {
     switch (category) {
-      case 'popular':
-        return <Heart className="h-4 w-4" />;
       case 'bullish':
         return <TrendingUp className="h-4 w-4" />;
       case 'bearish':
@@ -29,13 +27,9 @@ export const StrategyTabs = () => {
   };
 
   return (
-    <Tabs defaultValue="popular" className="w-full">
+    <Tabs defaultValue="bullish" className="w-full">
       <div className="flex justify-center mb-8">
-        <TabsList className="grid w-full max-w-md grid-cols-5 bg-muted/50">
-          <TabsTrigger value="popular" className="flex items-center gap-2 text-xs">
-            {getTabIcon('popular')}
-            <span className="hidden sm:inline">Popular</span>
-          </TabsTrigger>
+        <TabsList className="grid w-full max-w-lg grid-cols-4 bg-muted/50">
           <TabsTrigger value="bullish" className="flex items-center gap-2 text-xs">
             {getTabIcon('bullish')}
             <span className="hidden sm:inline">Bullish</span>
@@ -54,18 +48,6 @@ export const StrategyTabs = () => {
           </TabsTrigger>
         </TabsList>
       </div>
-
-      <TabsContent value="popular">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {getStrategiesByCategory('popular').map((strategy) => (
-            <StrategyCard
-              key={strategy.id}
-              strategy={strategy}
-              onClick={() => handleStrategyClick(strategy.slug)}
-            />
-          ))}
-        </div>
-      </TabsContent>
 
       <TabsContent value="bullish">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
