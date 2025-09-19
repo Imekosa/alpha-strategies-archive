@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import levelLogo from "@/assets/level-logo.png";
 
 export const Header = () => {
   return (
@@ -6,11 +7,13 @@ export const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">OA</span>
-              </div>
-              <span className="text-xl font-bold">Option Alpha</span>
+            <div className="flex items-center space-x-3">
+              <img 
+                src={levelLogo} 
+                alt="Level Logo" 
+                className="h-10 w-10 object-contain"
+              />
+              <span className="text-xl font-bold">Level</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
               <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">
