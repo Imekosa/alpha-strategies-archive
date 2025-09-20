@@ -139,7 +139,8 @@ export const StrategyDetail = () => {
           <TabsContent value="learn">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Main Content */}
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2 space-y-8">
+                {/* Overview */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-2xl">{strategy.name}</CardTitle>
@@ -147,29 +148,173 @@ export const StrategyDetail = () => {
                   </CardHeader>
                   <CardContent className="prose prose-lg max-w-none">
                     <p className="text-muted-foreground mb-6">
-                      {strategy.description}
-                    </p>
-                    
-                    <h4 className="text-lg font-semibold mb-4">How it works</h4>
-                    <p className="text-muted-foreground mb-6">
-                      This strategy involves specific option positions that align with your market outlook. 
-                      The risk and reward characteristics make it suitable for traders who have a {strategy.category} 
-                      market view and {strategy.riskLevel} risk tolerance.
-                    </p>
-
-                    <h4 className="text-lg font-semibold mb-4">Market Outlook</h4>
-                    <p className="text-muted-foreground mb-6">
-                      This strategy performs best when the underlying asset moves in alignment with your {strategy.category} bias. 
-                      It's important to consider the time decay and volatility impacts on the position.
-                    </p>
-
-                    <h4 className="text-lg font-semibold mb-4">Risk Management</h4>
-                    <p className="text-muted-foreground mb-6">
-                      As a {strategy.riskLevel} risk strategy, proper position sizing and exit planning are crucial. 
-                      Consider your overall portfolio allocation and risk tolerance when implementing this strategy.
+                      {strategy.overview || strategy.description}
                     </p>
                   </CardContent>
                 </Card>
+
+                {/* Market Outlook */}
+                {strategy.marketOutlook && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">{strategy.name} market outlook</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.marketOutlook}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* How to Set Up */}
+                {strategy.howToSetup && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">How to set up a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.howToSetup}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Payoff Diagram Details */}
+                {strategy.payoffDiagram && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">{strategy.name} payoff diagram</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground">{strategy.payoffDiagram.description}</p>
+                      {strategy.payoffDiagram.example && (
+                        <p className="text-muted-foreground">{strategy.payoffDiagram.example}</p>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Entering */}
+                {strategy.entering && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Entering a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.entering}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Exiting */}
+                {strategy.exiting && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Exiting a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.exiting}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Time Decay */}
+                {strategy.timeDecay && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Time decay impact on a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.timeDecay}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Implied Volatility */}
+                {strategy.impliedVolatility && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Implied volatility impact on a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.impliedVolatility}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Adjusting */}
+                {strategy.adjusting && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Adjusting a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground">{strategy.adjusting.description}</p>
+                      <p className="text-muted-foreground">{strategy.adjusting.method}</p>
+                      {strategy.adjusting.example && (
+                        <p className="text-muted-foreground">{strategy.adjusting.example}</p>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Rolling */}
+                {strategy.rolling && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Rolling a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground">{strategy.rolling.description}</p>
+                      {strategy.rolling.example && (
+                        <p className="text-muted-foreground">{strategy.rolling.example}</p>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Hedging */}
+                {strategy.hedging && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Hedging a {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground">{strategy.hedging.description}</p>
+                      <p className="text-muted-foreground">{strategy.hedging.method}</p>
+                      {strategy.hedging.example && (
+                        <p className="text-muted-foreground">{strategy.hedging.example}</p>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Synthetic */}
+                {strategy.synthetic && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">Synthetic {strategy.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{strategy.synthetic}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* FAQs */}
+                {strategy.faqs && strategy.faqs.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl">FAQs</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      {strategy.faqs.map((faq, index) => (
+                        <div key={index}>
+                          <h4 className="text-lg font-semibold mb-2">{faq.question}</h4>
+                          <p className="text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                )}
               </div>
 
               {/* Sidebar */}
@@ -194,9 +339,9 @@ export const StrategyDetail = () => {
                         <line x1="20" y1="180" x2="280" y2="180" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
                         <line x1="150" y1="20" x2="150" y2="180" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
                         
-                        {/* Strategy line - example curve */}
+                        {/* Strategy line - Long Call curve */}
                         <path 
-                          d="M20 160 Q80 140 150 100 T280 60" 
+                          d="M20 160 L130 160 L280 20" 
                           fill="none" 
                           stroke="hsl(var(--chart-positive))" 
                           strokeWidth="3"
@@ -204,8 +349,12 @@ export const StrategyDetail = () => {
                         />
                         
                         {/* Profit/Loss areas */}
-                        <text x="30" y="40" fontSize="12" fill="hsl(var(--chart-positive))">Profit</text>
-                        <text x="30" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Loss</text>
+                        <text x="200" y="40" fontSize="12" fill="hsl(var(--chart-positive))">Unlimited Profit</text>
+                        <text x="30" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Limited Loss</text>
+                        
+                        {/* Break-even point */}
+                        <circle cx="130" cy="160" r="3" fill="hsl(var(--primary))" />
+                        <text x="135" y="155" fontSize="10" fill="hsl(var(--primary))">BE</text>
                         
                         {/* Labels */}
                         <text x="250" y="195" fontSize="10" fill="currentColor" opacity="0.7">Stock Price</text>
@@ -213,7 +362,7 @@ export const StrategyDetail = () => {
                       </svg>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      This diagram shows the potential profit and loss at expiration based on different stock prices.
+                      {strategy.payoffDiagram?.description || 'This diagram shows the potential profit and loss at expiration based on different stock prices.'}
                     </p>
                   </CardContent>
                 </Card>
@@ -224,6 +373,22 @@ export const StrategyDetail = () => {
                     <CardTitle className="text-lg">Key Metrics</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
+                    {strategy.payoffDiagram && (
+                      <>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-muted-foreground">Max Profit:</span>
+                          <span className="text-sm font-medium">{strategy.payoffDiagram.maxProfit}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-muted-foreground">Max Loss:</span>
+                          <span className="text-sm font-medium">{strategy.payoffDiagram.maxLoss}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-muted-foreground">Breakeven:</span>
+                          <span className="text-sm font-medium">{strategy.payoffDiagram.breakeven}</span>
+                        </div>
+                      </>
+                    )}
                     <div className="flex justify-between">
                       <span className="text-sm text-muted-foreground">Risk Level:</span>
                       <Badge variant="outline" className={`text-xs ${getRiskColor(strategy.riskLevel)}`}>
@@ -240,6 +405,30 @@ export const StrategyDetail = () => {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Strategy Features */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Strategy Features</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Market Outlook:</span>
+                      <Badge variant="outline" className="text-xs">
+                        {getCategoryIcon(strategy.category)}
+                        <span className="ml-1 capitalize">{strategy.category}</span>
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Option Buyer:</span>
+                      <span className="text-sm">You pay to enter</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Strategy Setup:</span>
+                      <span className="text-sm">Single-leg strategy</span>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </TabsContent>
@@ -252,19 +441,27 @@ export const StrategyDetail = () => {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-2xl font-bold text-primary">68%</div>
+                    <div className="text-2xl font-bold text-primary">
+                      {strategy.stats?.winRate || '68%'}
+                    </div>
                     <div className="text-sm text-muted-foreground">Win Rate</div>
                   </div>
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-2xl font-bold text-primary">$125</div>
+                    <div className="text-2xl font-bold text-primary">
+                      {strategy.stats?.avgProfit || '$125'}
+                    </div>
                     <div className="text-sm text-muted-foreground">Avg Profit</div>
                   </div>
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-2xl font-bold text-chart-negative">$85</div>
+                    <div className="text-2xl font-bold text-chart-negative">
+                      {strategy.stats?.avgLoss || '$85'}
+                    </div>
                     <div className="text-sm text-muted-foreground">Avg Loss</div>
                   </div>
                   <div className="text-center p-4 border rounded-lg">
-                    <div className="text-2xl font-bold text-primary">1.47</div>
+                    <div className="text-2xl font-bold text-primary">
+                      {strategy.stats?.profitFactor || '1.47'}
+                    </div>
                     <div className="text-sm text-muted-foreground">Profit Factor</div>
                   </div>
                 </div>
