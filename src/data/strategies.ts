@@ -118,11 +118,68 @@ export const strategies: Strategy[] = [
     id: 'short-put-bullish',
     name: 'Short Put',
     slug: 'short-put',
-    description: 'A single-leg, undefined risk, bullish options strategy. Selling a put option generates premium income with substantial downside risk.',
+    description: 'A single-leg, bullish options strategy with undefined risk and limited profit potential. Short puts are profitable if the underlying asset\'s price is above the strike price at expiration.',
     category: 'bullish',
     riskLevel: 'high',
     complexity: 'intermediate',
-    iconPath: '/icons/short-put.svg'
+    iconPath: '/icons/short-put.svg',
+    overview: 'Selling a naked put option is a levered alternative to buying shares of stock. Selling single options is considered "naked" because there is no risk protection if the stock moves against the position. Because options are levered instruments, each short put contract is equivalent to holding 100 shares of stock. Short put option positions are typically cash-secured, meaning the put option writer must have enough capital available in his or her account to cover the cost of 100 shares if stock is assigned.',
+    marketOutlook: 'A short put is sold when the seller believes the price of the underlying asset will be above the strike price on or before the expiration date and/or implied volatility will decrease. The closer the strike price is to the underlying\'s price, the more credit will be received. Selling a put option can be used to enter a long position if the investor wishes to buy the underlying stock. Because selling options collects a premium, initiating a long position with a short put reduces the cost basis if the put is ultimately assigned to the option seller.',
+    howToSetup: 'A short put position is initiated when a seller writes a put option contract. Put options are listed in an options chain and provide relevant information for every strike price and expiration available, including the bid and ask price. The credit received at trade entry is called the premium. Market participants consider multiple factors to assess the option premium\'s value, including the strike price relative to the stock price, time until expiration, and volatility.',
+    payoffDiagram: {
+      description: 'The payoff diagram for a short put represents the risk involved with selling naked options. Profit potential is limited to the amount of credit received when the put is sold. The risk is undefined until the stock reaches $0.',
+      maxProfit: 'Premium received (limited)',
+      maxLoss: 'Strike price - premium received (substantial)',
+      breakeven: 'Strike price - premium received',
+      example: 'For example, if a short put option with a strike price of $100 is sold for $5.00, the maximum profit potential is $500. The maximum loss is undefined below the break-even point. The strike price minus the premium collected equals the break-even price of $95. If the underlying stock price is below the break-even point at expiration, the position will result in a loss.'
+    },
+    entering: 'To enter a short put position, a sell-to-open (STO) order is sent to the broker. The order is either filled at the asking price (market order) or at the minimum price an investor is willing to receive (limit order). Once a put option is sold, cash is credited to the trading account. Because selling put options has considerable downside risk, the broker will typically require the account have enough money if the option is assigned. For example, if one put option is sold at the $100 strike price, the broker may require at least $10,000 of available funds in the account.',
+    exiting: 'There are multiple ways to exit a short put position. Anytime before expiration, a buy-to-close (BTC) order can be entered, and the contract will be purchased at the market or limit price. The premium paid will be debited from the account. If the contract is purchased for more premium than initially collected, a loss is realized. If the contract is purchased for less premium than initially collected, a profit is realized. The buyer of the long put contract can choose to exercise the option at any time, and the seller is obligated to buy 100 shares at the strike price. If the short put option is in-the-money (ITM) at expiration, the option will automatically be assigned to the option seller. If the stock price is above the strike price at expiration, the option is out-of-the-money (OTM). The contract will expire worthless, and the seller will keep the entire premium initially collected.',
+    timeDecay: 'Time remaining until expiration and implied volatility make up an option\'s extrinsic value and impact the premium price. All else being equal, options contracts with more time until expiration have higher prices because there is more time for the underlying asset to experience price movement. As time until expiration decreases, the option price goes down. Therefore, time decay, or theta, works in favor of put option sellers because an option\'s value will decrease as expiration approaches.',
+    impliedVolatility: 'Implied volatility reflects the possibility of future price movements. Higher implied volatility results in higher option prices because there is an expectation the price may move more than expected in the future. As implied volatility decreases, a put option contract will lose value and the seller may purchase the contract for less money than it was sold. Options sellers benefit when implied volatility decreases before expiration.',
+    adjusting: {
+      description: 'Short put positions can be managed during a trade. A single-leg short put option can be adjusted to minimize risk.',
+      method: 'If the position is challenged, a put option can be purchased at a lower strike price to convert the short put into a bull put credit spread. The long option defines the position\'s risk, but lowers the profit potential to the width of the spread minus the credit received.',
+      example: 'For example, if a $100 put option is sold, a $90 put option can be purchased. If the long put costs $2.00, the max profit potential is reduced to $3.00. However, the maximum risk is defined at $700 if the underlying asset is below $90 at expiration.'
+    },
+    rolling: {
+      description: 'If an investor wants to extend the trade, the short put option can be rolled out to a future expiration date. Rolling out the option requires buying-to-close (BTC) the short put and selling-to-open (STO) a new put option with the same strike price for a future date. Rolling the option should result in additional credit, which will widen the break-even price and increase the profit potential relative to the original position.',
+      example: 'For example, if a short put with a $100 strike price has a May expiration date, the position could closed and reopened with a June expiration date. If the adjustment receives $2.00 of premium, the break-even point is extended to $93.'
+    },
+    hedging: {
+      description: 'To hedge a short put, an investor may sell a call with the same strike price and expiration date, thereby creating a short straddle.',
+      method: 'This will add additional credit and extend the break-even price above and below the centered strike price of the short straddle equal to the amount of premium collected. While this reduces cost basis, the risk is still undefined and potentially substantial.',
+      example: 'For example, if the position is challenged, a call with a $100 strike price could be sold. If an additional $5.00 of credit is received, the max profit increases to $1,000 and the break-even price moves down to $90.'
+    },
+    synthetic: 'A synthetic short put combines long stock with a short call option at the strike price of the original long stock position. This creates a synthetic short put because the payoff diagram is similar to a single short put option. As with a naked short put, the expectation is price will rise before expiration. Selling the call will collect a premium, but the risk beyond the premium received is still unlimited if the stock continues to fall. The maximum profit potential is limited to the premium collected for the short call. If the stock closes above the strike price at expiration, the long stock will be covered when the short call is exercised, and the shares will offset.',
+    faqs: [
+      {
+        question: 'What is a short put option?',
+        answer: 'A short put is a bullish options strategy with undefined risk and limited profit potential. You receive a credit when opening a naked short put, which lowers your cost basis.'
+      },
+      {
+        question: 'Is a short put bullish?',
+        answer: 'Yes, short put options are bullish. You will profit if the underlying stock\'s price is above the short put strike at expiration.'
+      },
+      {
+        question: 'Can I exit a short put before expiration?',
+        answer: 'Yes, you can exit a short put at any time by buying back the option. If you buy the options for less than you sold it, you\'ll realize a profit of the difference. Short puts are typically profitable when the underlying stock\'s price increases and/or volatility decreases.'
+      },
+      {
+        question: 'How to hedge a short put option?',
+        answer: 'There are multiple ways to hedge a short put option. You can sell a short call to create a short straddle or short strangle. You could also buy an out-of-the-money long put option to create a risk-defined short put spread.'
+      },
+      {
+        question: 'What is an example of a short put?',
+        answer: 'You sell a short put when you\'re bullish and believe the stock will stay above a certain price. For example, if you think AAPL will be above $140 in two months, you could sell a put with a $140 strike price 60 days to expiration.'
+      }
+    ],
+    stats: {
+      winRate: '72%',
+      avgProfit: '$95',
+      avgLoss: '$285',
+      profitFactor: '1.34'
+    }
   },
   {
     id: 'covered-call-bullish',

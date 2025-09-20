@@ -339,18 +339,50 @@ export const StrategyDetail = () => {
                         <line x1="20" y1="180" x2="280" y2="180" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
                         <line x1="150" y1="20" x2="150" y2="180" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
                         
-                        {/* Strategy line - Long Call curve */}
-                        <path 
-                          d="M20 160 L130 160 L280 20" 
-                          fill="none" 
-                          stroke="hsl(var(--chart-positive))" 
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                        />
+                        {/* Strategy line - conditional based on strategy */}
+                        {strategy.slug === 'long-call' ? (
+                          <path 
+                            d="M20 160 L130 160 L280 20" 
+                            fill="none" 
+                            stroke="hsl(var(--chart-positive))" 
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                        ) : strategy.slug === 'short-put' ? (
+                          <path 
+                            d="M20 60 L130 60 L280 160" 
+                            fill="none" 
+                            stroke="hsl(var(--chart-positive))" 
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                        ) : (
+                          <path 
+                            d="M20 160 Q80 140 150 100 T280 60" 
+                            fill="none" 
+                            stroke="hsl(var(--chart-positive))" 
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                        )}
                         
-                        {/* Profit/Loss areas */}
-                        <text x="200" y="40" fontSize="12" fill="hsl(var(--chart-positive))">Unlimited Profit</text>
-                        <text x="30" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Limited Loss</text>
+                        {/* Profit/Loss areas - conditional based on strategy */}
+                        {strategy.slug === 'long-call' ? (
+                          <>
+                            <text x="200" y="40" fontSize="12" fill="hsl(var(--chart-positive))">Unlimited Profit</text>
+                            <text x="30" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Limited Loss</text>
+                          </>
+                        ) : strategy.slug === 'short-put' ? (
+                          <>
+                            <text x="30" y="50" fontSize="12" fill="hsl(var(--chart-positive))">Limited Profit</text>
+                            <text x="200" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Unlimited Loss</text>
+                          </>
+                        ) : (
+                          <>
+                            <text x="200" y="40" fontSize="12" fill="hsl(var(--chart-positive))">Profit</text>
+                            <text x="30" y="170" fontSize="12" fill="hsl(var(--chart-negative))">Loss</text>
+                          </>
+                        )}
                         
                         {/* Break-even point */}
                         <circle cx="130" cy="160" r="3" fill="hsl(var(--primary))" />
@@ -420,8 +452,12 @@ export const StrategyDetail = () => {
                       </Badge>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">Option Buyer:</span>
-                      <span className="text-sm">You pay to enter</span>
+                      <span className="text-sm text-muted-foreground">
+                        {strategy.slug === 'short-put' || strategy.slug.includes('short') ? 'Option Seller:' : 'Option Buyer:'}
+                      </span>
+                      <span className="text-sm">
+                        {strategy.slug === 'short-put' || strategy.slug.includes('short') ? 'You receive money to enter' : 'You pay to enter'}
+                      </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Strategy Setup:</span>
