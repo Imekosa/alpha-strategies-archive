@@ -256,7 +256,68 @@ export const strategies: Strategy[] = [
     category: 'bullish',
     riskLevel: 'low',
     complexity: 'beginner',
-    iconPath: '/icons/protective-put.svg'
+    iconPath: '/icons/protective-put.svg',
+    overview: 'Protective puts are similar to purchasing car insurance: a premium is paid to protect against future risk, but the hope is that it will never be needed. Like car owners, investors are willing to pay a relatively small amount on a recurring basis to guarantee defined risk.',
+    marketOutlook: 'bullish',
+    howToSetup: 'Put options are listed on the option chain at various strike prices and expiration dates. The closer to the money the put option is, the more expensive the options contract. The more time until expiration, the more expensive the options contract. Purchasing a protective put will require paying a debit and will increase the cost basis of the original long stock position by the amount of the premium paid. An investor will need to consider these factors when deciding where he or she would like to protect their downside risk and for how long.',
+    payoffDiagram: {
+      description: 'A protective put will have a payoff diagram similar in appearance to a single-leg long call option. The maximum profit potential is unlimited if the underlying stock moves up and stays above the protective put strike price. The downside risk will be limited to the long put option\'s strike price plus the cost of the premium to own the long put.',
+      maxProfit: 'Unlimited',
+      maxLoss: 'Limited to put strike price minus stock purchase price minus premium paid',
+      breakeven: 'Stock purchase price + premium paid',
+      example: 'For example, if stock is owned at $100 and a protective put is purchased for $5.00 with a strike price of $95, the maximum risk for the position is $1000 per contract ($95 - $100 - $5 = -$10 x 100 shares per contract = -$1,000).'
+    },
+    entering: 'Entering a protective put position is very similar to opening a single long put option, but long stock is either already owned or purchased in conjunction with the protective put. Buying the long protective put will cost money and therefore increase the long stock position\'s cost basis, but that is the compromise for protecting the underlying asset from downside risk.',
+    exiting: 'Exiting a protective put will depend on where the price of the underlying asset is at expiration. If the stock price is above the protective put\'s strike price, the put will expire worthless. If the stock price is below the protective put\'s strike price, and the investor wishes to exercise the put option, 100 shares per contract will be sold at the strike price, and the position will be closed.',
+    timeDecay: 'Protective puts have extrinsic value like all options. Time decay, or Theta, will slowly decrease the value of the contract\'s premium. However, because protective puts are purchased for protection and not speculation, time decay is not as important. Ideally, since long stock is owned, the goal for a protective put is to see the price of the stock increase, and the protective put expire worthless.',
+    impliedVolatility: 'Implied volatility will have an impact on the pricing of protective puts. The higher the value of implied volatility, the more expensive the cost of the put option. Generally speaking, put options are more expensive than call options because investors are willing to pay a higher premium to protect from downside risk. When markets experience large price movements, implied volatility increases, and the cost of put options typically increases.',
+    adjusting: {
+      description: 'Protective put options positions can be managed during a trade as the price of the underlying stock moves. If the stock price rises, an investor may choose to move up the protective put to secure selling shares at a higher price.',
+      method: 'To do so, a sell-to-close (STC) order would be entered to exit the original long put option position. This would collect a credit, but typically at a lower price than the option was originally purchased. A buy-to-open (BTO) order would be entered for a new long put option with a higher strike price. This will cost more than the put option that was sold, and the total amount debited would be added to the original premium paid to create a new cost basis.',
+      example: 'For example, if stock is owned at $100 and a protective put is purchased for $5.00 with a strike price of $95, and the stock subsequently increases to $120, the original $95 put may be sold (for less credit than was initially paid) and a new put may be opened at $115. If the new protective put costs an additional $5.00, the position would still guarantee a profit of at least $500.'
+    },
+    rolling: {
+      description: 'Protective put options that expire out-of-the-money at expiration have no value. To initiate a new protective put contract, a long put can be purchased for a future expiration date at the same strike price or a different strike price depending on where the underlying stock is trading.',
+      example: 'Suppose the put is in-the-money at expiration, and the investor does not want to exercise their right to sell at that price (perhaps believing the stock will continue to rally in the future). In that case, the options contract can be rolled out to a future date by selling the original position and purchasing a new long put.'
+    },
+    hedging: {
+      description: 'Protective puts may be hedged to reduce the overall cost of the position. A short call can be sold above the stock price to collect a credit. This will limit the upside potential of the underlying stock position, but the premium received can offset the cost of the protective put.',
+      method: 'This combination is called a collar strategy.',
+      example: 'By selling a call option above the current stock price, the premium received helps offset the cost of the protective put while still providing downside protection.'
+    },
+    synthetic: 'A synthetic protective put can be created using other options strategies. One approach is to use a collar strategy, which combines the protective put with a covered call to reduce the overall cost of protection while limiting upside potential.',
+    faqs: [
+      {
+        question: 'What is a protective put?',
+        answer: 'A protective put is an options strategy combined with long stock that defines the underlying asset\'s downside risk. Protective puts are also known as married puts because the stock position and long put are "married" together to protect against a potential decrease in the stock\'s price.'
+      },
+      {
+        question: 'Are protective puts bullish or bearish?',
+        answer: 'Investors use a protective put when they want to limit downside risk of a long equity position. The investor is bullish on the underlying stock and uses the long put to hedge potential losses.'
+      },
+      {
+        question: 'Are protective puts worth it?',
+        answer: 'Protective puts limit a stock\'s downside and hedge against downside risk. However, buying a protective put adds cost to the original stock position and increases the trade\'s cost basis, so it is important to factor in those considerations when thinking of using a protective put.'
+      },
+      {
+        question: 'What is an example of a protective put?',
+        answer: 'If you own a stock at $100 per share, you could buy a protective put with a strike price of $95. If you pay $5.00 for the put option, the maximum risk for the position is $1000 per contract ($95 strike price - $100 cost basis - $5 option premium = -$10 (x 100 shares per contract) = -$1,000).'
+      },
+      {
+        question: 'When should I use a protective put?',
+        answer: 'Protective puts are ideal when you own stock and want to protect against downside risk while maintaining upside potential. They\'re especially useful during uncertain market conditions or when you want to lock in profits on a stock that has appreciated.'
+      },
+      {
+        question: 'How much does a protective put cost?',
+        answer: 'The cost of a protective put depends on several factors including the strike price relative to the stock price, time until expiration, and implied volatility. Puts closer to the current stock price cost more but provide better protection.'
+      }
+    ],
+    stats: {
+      winRate: '68%',
+      avgProfit: '$95',
+      avgLoss: '$87',
+      profitFactor: '1.8'
+    }
   },
   {
     id: 'leaps',
