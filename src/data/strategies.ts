@@ -182,6 +182,73 @@ export const strategies: Strategy[] = [
     }
   },
   {
+    id: 'covered-call-bullish',
+    name: 'Covered Call',
+    slug: 'covered-call',
+    description: 'A covered call is an options strategy with undefined risk and limited profit potential that combines a long stock position with a short call option. Covered calls are primarily used by investors looking to generate income on long portfolio holdings while reducing the position\'s cost basis.',
+    category: 'bullish',
+    riskLevel: 'medium',
+    complexity: 'beginner',
+    iconPath: '/icons/covered-call.svg',
+    overview: 'Covered calls are a natural bridge between stock investing and options. Because options are leveraged, each contract represents 100 shares of stock, so a covered call requires ownership of at least 100 shares of the underlying asset. The long shares of stock can be owned before selling the covered call, or the positions can be entered simultaneously by purchasing the shares and selling the covered call against the stock position.',
+    marketOutlook: 'A covered call strategy is used if an investor is moderately bullish and plans to hold shares of stock in an asset for an extended length of time. The covered call will help generate income during the holding period and lowers the original position\'s cost basis.',
+    howToSetup: 'A covered call consists of selling a call against shares of long stock. Typically, covered calls are sold out-of-the-money above the current price of the underlying asset. Calls that are sold closer to the stock price will result in more credit received but have a higher probability of being in-the-money at expiration.\n\nCovered calls do not eliminate downside risk if the asset drops in price, but every covered call sold adds credit to the account, thereby reducing the overall cost of holding the long stock position.',
+    payoffDiagram: {
+      description: 'Selling a covered call limits the profit potential and does not eliminate the downside risk. However, it does help to reduce the risk by the price of the premium received.',
+      maxProfit: 'Limited to strike price + premium received',
+      maxLoss: 'Substantial (stock price can go to zero minus premium received)',
+      breakeven: 'Stock purchase price - premium received',
+      example: 'For example, if stock is purchased at $100 and a call option is sold at the $105 strike price for $5.00, the original position\'s cost is now reduced by $5.00. Therefore, the cost basis and break-even point of the long stock position is now $95. If the stock closes above $105 at expiration, a profit of $1,000 will be realized per contract because the stock gained $5.00 per share ($500), plus the credit received from selling the covered call option ($500).'
+    },
+    entering: 'A covered call requires ownership of at least 100 shares of stock. If the stock is already owned, a call option may be sold at a higher strike price than the current stock price. A covered call can also be sold at the time the long stock is purchased.',
+    exiting: 'There are two scenarios for exiting a covered call at expiration, depending on where the stock price is relative to the strike price of the call option sold. If the stock price is below the strike price at expiration, the call option will expire worthless, and the option premium collected is the amount profited from the trade. At this point, a new covered call position may be initiated for a future expiration date.\n\nIf the stock price is above the strike price of the short call option at expiration, the long stock is "called away" at the strike price. If the short call option is in-the-money at expiration, but the investor does not want to sell the position, the trade can be rolled out to a later expiration date by buying back the short call and selling a new contract.',
+    timeDecay: 'Time remaining until expiration and implied volatility make up an option\'s extrinsic value and impact the price of the premium. Short call options contracts with more time until expiration will have higher prices because there is more time for the underlying asset to experience price movement. As the time until expiration decreases, the price of the call option goes down.\n\nCovered calls with longer-dated expirations will collect more premium when the trade is entered than those with shorter time duration. Time decay, or theta, works in favor of the covered call writer.',
+    impliedVolatility: 'Implied volatility reflects the possibility of future price movements. Higher implied volatility results in a higher price of short call options because there is an expectation the price will move more in the future. Selling covered calls with higher implied volatility will receive more credit at trade entry, but the underlying asset is expected to have more price fluctuations.',
+    adjusting: {
+      description: 'There are multiple ways to adjust the position of a covered call if the underlying asset\'s price moves up or down before expiration. A covered call is either in-the-money or out-of-the-money at expiration, and adjustments can be made to address each scenario.',
+      method: 'If the stock is above the short call strike price at expiration, a decision will need to be made. If no action is taken, the short call will be exercised and the broker will automatically sell 100 shares of stock per options contract at the option\'s strike price. If the covered call writer does not wish to exercise, the call option can be rolled out to the next expiration month.\n\nIf the underlying price has moved sideways or down before expiration and the stock price stayed below the short call, the original covered call will expire worthless. At this point, a new position may be opened for a future expiration date at the same strike price or a lower strike price.',
+      example: 'Most assignments do not occur until the last week of expiration. One exception that needs to be accounted for is dividend payments. If the underlying asset is about to pay a monthly or quarterly dividend, the short call is at greater risk of assignment if it is in-the-money.'
+    },
+    rolling: {
+      description: 'Covered calls can be rolled up or down before expiration. The short call option can be rolled down to a lower strike price within the same expiration month if the underlying asset has traded sideways or dropped in price.',
+      example: 'If the stock has moved above the strike price and the investor wishes to continue to hold the underlying stock and does not want the position called away, the covered call can be purchased and a new position sold at a later date with the same strike price or a different strike price.'
+    },
+    hedging: {
+      description: 'Covered calls can be hedged by rolling down the short call option as price decreases. To roll down the option, repurchase the short call (for less money than it was sold) and resell a call option closer to the stock price.',
+      method: 'Another strategy to consider is to purchase a long put option somewhere below the short call option. Long put options give the holder the right to sell shares of stock at the strike price.',
+      example: 'For example, if long stock is purchased at $100 and a covered call is sold at $105, a long put option could be purchased at $90 and guarantee the opportunity to sell stock at $90. Buying the put option will cost money and therefore offset some or all of the credit received for selling the covered call.'
+    },
+    synthetic: 'A synthetic covered call, also known as a poor man\'s covered call, is a cost-effective way to gain long exposure to an asset while still selling covered calls against the long call option position to lower the overall cost basis.\n\nA synthetic covered call has two parts. The first part consists of buying a deep in-the-money call with a far-dated expiration (also known as LEAPS). This replicates owning shares of stock but at a much lower capital outlay than actually owning the stock.\n\nThe second part of the synthetic covered call is to sell short-term call options against the position. Selling short-term calls throughout the longer expiration period will continually receive credit and help offset the cost of the long call position.',
+    faqs: [
+      {
+        question: 'What is a covered call?',
+        answer: 'A covered call is a popular options strategy used to generate income. To enter a covered call, you sell a call against shares of long stock. If an investor is moderately bullish and plans to hold shares of stock in an asset for an extended length of time, selling a covered call will bring in premium during the holding period to lower the original equity position\'s cost basis.'
+      },
+      {
+        question: 'How do covered calls work?',
+        answer: 'A covered call consists of selling a call against shares of long stock. Typically, covered calls are sold out-of-the-money above the current price of the underlying asset. If you own at least 100 shares of stock, you can sell a covered call using the equity position as a collateral. If the covered call expires out-of-the-money, you\'ll keep the full premium. In-the-money calls will automatically be assigned at expiration, and you\'re required to sell the shares at the strike price.'
+      },
+      {
+        question: 'What is an example of a covered call?',
+        answer: 'A covered call requires ownership of at least 100 shares of stock. For example, if you own 100 shares of AAPL stock at $150 a share, you could choose to sell a covered call with a $150 strike price.'
+      },
+      {
+        question: 'What is the downside of covered calls?',
+        answer: 'While covered calls reduce the stock position\'s cost basis, they do not eliminate downside risk. If your call option expires in-the-money, you are obligated to accept assignment and sell your stock shares at the strike price. You can always roll out an ITM covered call to a later expiration date if you do not wish to sell the shares.'
+      },
+      {
+        question: 'What is the best strategy for selling covered calls?',
+        answer: 'There are many factors to consider when selling a covered call. Calls sold closer to the stock price will receive more credit but have a higher probability of being in-the-money at expiration. Likewise, calls with longer days to expiration have higher premiums.'
+      }
+    ],
+    stats: {
+      winRate: '72%',
+      avgProfit: '$85',
+      avgLoss: '$123',
+      profitFactor: '2.1'
+    }
+  },
+  {
     id: 'protective-put',
     name: 'Protective Put',
     slug: 'protective-put',
@@ -550,69 +617,12 @@ export const strategies: Strategy[] = [
   {
     id: 'covered-call-hedging',
     name: 'Covered Call',
-    slug: 'covered-call',
-    description: 'A covered call is an options strategy with undefined risk and limited profit potential that combines a long stock position with a short call option. Covered calls are primarily used by investors looking to generate income on long portfolio holdings while reducing the position\'s cost basis.',
+    slug: 'covered-call-duplicate',
+    description: 'An options strategy with undefined risk and limited profit potential that combines a long stock position with a short call option.',
     category: 'hedging',
-    riskLevel: 'medium',
+    riskLevel: 'low',
     complexity: 'beginner',
-    iconPath: '/icons/covered-call.svg',
-    overview: 'Covered calls are a natural bridge between stock investing and options. Because options are leveraged, each contract represents 100 shares of stock, so a covered call requires ownership of at least 100 shares of the underlying asset. The long shares of stock can be owned before selling the covered call, or the positions can be entered simultaneously by purchasing the shares and selling the covered call against the stock position.',
-    marketOutlook: 'A covered call strategy is used if an investor is moderately bullish and plans to hold shares of stock in an asset for an extended length of time. The covered call will help generate income during the holding period and lowers the original position\'s cost basis.',
-    howToSetup: 'A covered call consists of selling a call against shares of long stock. Typically, covered calls are sold out-of-the-money above the current price of the underlying asset. Calls that are sold closer to the stock price will result in more credit received but have a higher probability of being in-the-money at expiration.\n\nCovered calls do not eliminate downside risk if the asset drops in price, but every covered call sold adds credit to the account, thereby reducing the overall cost of holding the long stock position.',
-    payoffDiagram: {
-      description: 'Selling a covered call limits the profit potential and does not eliminate the downside risk. However, it does help to reduce the risk by the price of the premium received.',
-      maxProfit: 'Limited to strike price + premium received',
-      maxLoss: 'Substantial (stock price can go to zero minus premium received)',
-      breakeven: 'Stock purchase price - premium received',
-      example: 'For example, if stock is purchased at $100 and a call option is sold at the $105 strike price for $5.00, the original position\'s cost is now reduced by $5.00. Therefore, the cost basis and break-even point of the long stock position is now $95. If the stock closes above $105 at expiration, a profit of $1,000 will be realized per contract because the stock gained $5.00 per share ($500), plus the credit received from selling the covered call option ($500).'
-    },
-    entering: 'A covered call requires ownership of at least 100 shares of stock. If the stock is already owned, a call option may be sold at a higher strike price than the current stock price. A covered call can also be sold at the time the long stock is purchased.',
-    exiting: 'There are two scenarios for exiting a covered call at expiration, depending on where the stock price is relative to the strike price of the call option sold. If the stock price is below the strike price at expiration, the call option will expire worthless, and the option premium collected is the amount profited from the trade. At this point, a new covered call position may be initiated for a future expiration date.\n\nIf the stock price is above the strike price of the short call option at expiration, the long stock is "called away" at the strike price. If the short call option is in-the-money at expiration, but the investor does not want to sell the position, the trade can be rolled out to a later expiration date by buying back the short call and selling a new contract.',
-    timeDecay: 'Time remaining until expiration and implied volatility make up an option\'s extrinsic value and impact the price of the premium. Short call options contracts with more time until expiration will have higher prices because there is more time for the underlying asset to experience price movement. As the time until expiration decreases, the price of the call option goes down.\n\nCovered calls with longer-dated expirations will collect more premium when the trade is entered than those with shorter time duration. Time decay, or theta, works in favor of the covered call writer.',
-    impliedVolatility: 'Implied volatility reflects the possibility of future price movements. Higher implied volatility results in a higher price of short call options because there is an expectation the price will move more in the future. Selling covered calls with higher implied volatility will receive more credit at trade entry, but the underlying asset is expected to have more price fluctuations.',
-    adjusting: {
-      description: 'There are multiple ways to adjust the position of a covered call if the underlying asset\'s price moves up or down before expiration. A covered call is either in-the-money or out-of-the-money at expiration, and adjustments can be made to address each scenario.',
-      method: 'If the stock is above the short call strike price at expiration, a decision will need to be made. If no action is taken, the short call will be exercised and the broker will automatically sell 100 shares of stock per options contract at the option\'s strike price. If the covered call writer does not wish to exercise, the call option can be rolled out to the next expiration month.\n\nIf the underlying price has moved sideways or down before expiration and the stock price stayed below the short call, the original covered call will expire worthless. At this point, a new position may be opened for a future expiration date at the same strike price or a lower strike price.',
-      example: 'Most assignments do not occur until the last week of expiration. One exception that needs to be accounted for is dividend payments. If the underlying asset is about to pay a monthly or quarterly dividend, the short call is at greater risk of assignment if it is in-the-money.'
-    },
-    rolling: {
-      description: 'Covered calls can be rolled up or down before expiration. The short call option can be rolled down to a lower strike price within the same expiration month if the underlying asset has traded sideways or dropped in price.',
-      example: 'If the stock has moved above the strike price and the investor wishes to continue to hold the underlying stock and does not want the position called away, the covered call can be purchased and a new position sold at a later date with the same strike price or a different strike price.'
-    },
-    hedging: {
-      description: 'Covered calls can be hedged by rolling down the short call option as price decreases. To roll down the option, repurchase the short call (for less money than it was sold) and resell a call option closer to the stock price.',
-      method: 'Another strategy to consider is to purchase a long put option somewhere below the short call option. Long put options give the holder the right to sell shares of stock at the strike price.',
-      example: 'For example, if long stock is purchased at $100 and a covered call is sold at $105, a long put option could be purchased at $90 and guarantee the opportunity to sell stock at $90. Buying the put option will cost money and therefore offset some or all of the credit received for selling the covered call.'
-    },
-    synthetic: 'A synthetic covered call, also known as a poor man\'s covered call, is a cost-effective way to gain long exposure to an asset while still selling covered calls against the long call option position to lower the overall cost basis.\n\nA synthetic covered call has two parts. The first part consists of buying a deep in-the-money call with a far-dated expiration (also known as LEAPS). This replicates owning shares of stock but at a much lower capital outlay than actually owning the stock.\n\nThe second part of the synthetic covered call is to sell short-term call options against the position. Selling short-term calls throughout the longer expiration period will continually receive credit and help offset the cost of the long call position.',
-    faqs: [
-      {
-        question: 'What is a covered call?',
-        answer: 'A covered call is a popular options strategy used to generate income. To enter a covered call, you sell a call against shares of long stock. If an investor is moderately bullish and plans to hold shares of stock in an asset for an extended length of time, selling a covered call will bring in premium during the holding period to lower the original equity position\'s cost basis.'
-      },
-      {
-        question: 'How do covered calls work?',
-        answer: 'A covered call consists of selling a call against shares of long stock. Typically, covered calls are sold out-of-the-money above the current price of the underlying asset. If you own at least 100 shares of stock, you can sell a covered call using the equity position as a collateral. If the covered call expires out-of-the-money, you\'ll keep the full premium. In-the-money calls will automatically be assigned at expiration, and you\'re required to sell the shares at the strike price.'
-      },
-      {
-        question: 'What is an example of a covered call?',
-        answer: 'A covered call requires ownership of at least 100 shares of stock. For example, if you own 100 shares of AAPL stock at $150 a share, you could choose to sell a covered call with a $150 strike price.'
-      },
-      {
-        question: 'What is the downside of covered calls?',
-        answer: 'While covered calls reduce the stock position\'s cost basis, they do not eliminate downside risk. If your call option expires in-the-money, you are obligated to accept assignment and sell your stock shares at the strike price. You can always roll out an ITM covered call to a later expiration date if you do not wish to sell the shares.'
-      },
-      {
-        question: 'What is the best strategy for selling covered calls?',
-        answer: 'There are many factors to consider when selling a covered call. Calls sold closer to the stock price will receive more credit but have a higher probability of being in-the-money at expiration. Likewise, calls with longer days to expiration have higher premiums.'
-      }
-    ],
-    stats: {
-      winRate: '72%',
-      avgProfit: '$85',
-      avgLoss: '$123',
-      profitFactor: '2.1'
-    }
+    iconPath: '/icons/covered-call.svg'
   },
   {
     id: 'covered-put-hedging',
