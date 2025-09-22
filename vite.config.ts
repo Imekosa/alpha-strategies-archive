@@ -4,16 +4,22 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 5000,
-    allowedHosts: [".replit.dev"],
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+export default defineConfig(({ mode }) => {
+  // Detect if running in Replit environment
+  const isReplit = process.env.REPLIT_URL || process.env.REPL_SLUG;
+  const port = isReplit ? 5000 : 8080;
+  
+  return {
+    server: {
+      host: "::",
+      port: port,
+      allowedHosts: [".replit.dev"],
     },
-  },
-}));
+    plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+  };
+});
