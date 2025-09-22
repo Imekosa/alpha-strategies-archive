@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import { OptionsStrategies } from "./pages/OptionsStrategies";
 import { StrategyDetail } from "./pages/StrategyDetail";
+import { TradeIdeas } from "./pages/TradeIdeas";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/options-strategies" element={<OptionsStrategies />} />
           <Route path="/strategies/:slug" element={<StrategyDetail />} />
+          <Route path="/trade-ideas" element={<TradeIdeas />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -22,6 +22,9 @@ export const Header = () => {
               <a href="/options-strategies" className="text-foreground font-medium">
                 Options Strategies
               </a>
+              <a href="/trade-ideas" className="text-muted-foreground hover:text-foreground transition-colors">
+                Trade Ideas
+              </a>
               <a href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
                 Pricing
               </a>
